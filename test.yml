@@ -1,0 +1,9 @@
+---
+- name: Check Docker Version
+  hosts: all
+  become: yes  # Ensure privilege escalation if needed
+  tasks:
+    - name: Get Docker version
+      docker_version_facts:
+    - debug:
+        var: ansible_facts.docker_version
