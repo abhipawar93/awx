@@ -1,8 +1,13 @@
-- name: Check Docker Version
-  hosts: all
-  become: yes  # Ensure privilege escalation if needed
+---
+- name: Ping google.com
+  hosts: localhost  # or specify your target hosts
+
   tasks:
-    - name: Get Docker version
-      docker_version_facts:
+    - name: Ping google.com
+      uri:
+        url: "http://google.com"
+        return_content: no
+      register: result
+
     - debug:
-        var: ansible_facts.docker_version
+        msg: "Ping to google.com was {{ 'successful' if result.status == 200 else 'unsuccessful' }}"
